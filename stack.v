@@ -4,6 +4,7 @@
 module ui
 
 import eventbus
+import gx
 
 enum Direction {
 	row
@@ -81,10 +82,7 @@ fn (mut s Stack) init(parent Layout) {
 		} else {
 			y += s.spacing
 		}
-		// println('setting widget pos $x, $yy $s.margin')
-		// if child is TextBox {
-		// println('txtbox $child.placeholder')
-		//}
+		// println('setting widget pos $x, $y')
 		child.set_pos(x, yy)
 		if s.direction == .row {
 			x += child_width
@@ -136,8 +134,8 @@ fn (c &Stack) size() (int, int) {
 }
 
 fn (mut s Stack) draw() {
-	// child_len := s.children.len
-	// total_spacing := (child_len - 1) * s.spacing
+	child_len := s.children.len
+	total_spacing := (child_len - 1) * s.spacing
 	mut pos_y := s.y
 	if s.vertical_alignment == .bottom {
 		// Move the stack to the bottom. First find the biggest height.
@@ -191,12 +189,9 @@ fn (mut s Stack) draw() {
 	*/
 }
 
+/*
 fn (s &Stack) align(size int) int {
-	align := if s.direction == .column {
-		int(s.horizontal_alignment)
-	} else {
-		int(s.vertical_alignment)
-	}
+	align := if s.direction == .column { int(s.horizontal_alignment) } else { int(s.vertical_alignment) }
 	match align {
 		0 { return s.get_oriented_x_axis() }
 		1 { return s.get_oriented_x_axis() + ((s.get_oriented_width() - size) / 2) }
@@ -204,7 +199,7 @@ fn (s &Stack) align(size int) int {
 		else { return s.get_oriented_x_axis() }
 	}
 }
-
+*/
 fn (s &Stack) get_ui() &UI {
 	return s.ui
 }
@@ -243,6 +238,7 @@ fn (s &Stack) resize(width int, height int) {
 }
 
 // Helpers to correctly get width, height, x, y for both row & column.
+/*
 fn (s &Stack) get_oriented_height() int {
 	return if s.direction == .column {
 		s.height
@@ -258,6 +254,7 @@ fn (s &Stack) get_oriented_width() int {
 		s.height
 	}
 }
+
 
 fn (s &Stack) get_oriented_y_axis() int {
 	return if s.direction == .column {
@@ -278,7 +275,7 @@ fn (s &Stack) get_oriented_x_axis() int {
 fn (mut s Stack) set_oriented_height(h int) int {
 	if s.direction == .column {
 		if s.height == 0 {
-			s.height = h
+		s.height = h
 		}
 	} else {
 		s.width = h
@@ -291,8 +288,9 @@ fn (mut s Stack) set_oriented_width(w int) int {
 		s.width = w
 	} else {
 		if s.height == 0 {
-			s.height = w
+		s.height = w
 		}
 	}
 	return w
 }
+*/

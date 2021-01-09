@@ -5,10 +5,11 @@ module ui
 
 import gx
 import gg
+type Example = []gx.Color | gx.Color
 
 pub struct Rectangle {
 pub mut:
-	color        gx.Color
+	color        Example
 	text         string
 mut:
 	parent       Layout
@@ -21,12 +22,26 @@ mut:
 	border_color gx.Color
 	ui           &UI
 }
-
 pub struct RectangleConfig {
+	// textute    {
+	// 			path:
+	// 			degree:
+	// 			scale{
+	// 				x:
+	// 				y:
+	// 			}
+
+	// 		}
+	// gradient_manager	{
+	// 			 vertex_colors
+	// 			 degree
+	// 			 stops
+	// 			 resolution				 	
+	// 			}
 	text         string
 	height       int
 	width        int
-	color        gx.Color
+	color        Example
 	radius       int
 	border       bool
 	border_color gx.Color = gx.Color{
@@ -73,13 +88,32 @@ fn (mut r Rectangle) propose_size(w int, h int) (int, int) {
 }
 
 fn (mut r Rectangle) draw() {
+	color_type:=r.color
+	mut color1:=gx.red
+	mut color2:=[]gx.Color
+	if color_type is gx.Color{
+		color1=color_type
+	}
+	if color_type is []gx.Color{
+		color2=r.color as []gx.Color
+		color1=color2[0]
+	}
 	if r.radius > 0 {
-		r.ui.gg.draw_rounded_rect(r.x, r.y, r.width, r.height, r.radius, r.color)
+		// r.ui.gg.draw_rounded_rect(r.x, r.y, r.width, r.height, r.radius, r.color)		
+		r.ui.gg.draw_rounded_rect(r.x, r.y, r.width, r.height, r.radius, color1)
 		if r.border {
 			r.ui.gg.draw_empty_rounded_rect(r.x, r.y, r.width, r.height, r.radius, r.border_color)
 		}
 	} else {
-		r.ui.gg.draw_rect(r.x, r.y, r.width, r.height, r.color)
+		// r.ui.gg.draw_rect(r.x, r.y, r.width, r.height, r.color)
+		r.ui.gg.new_draw_rect({
+			height:any_float(r.height),
+			width:any_float(r.width), 
+			pos_x:any_float(r.x), 
+			pos_y:any_float(r.y),
+			backgroud_color:color2
+			})
+
 		if r.border {
 			r.ui.gg.draw_empty_rect(r.x, r.y, r.width, r.height, r.border_color)
 		}

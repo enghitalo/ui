@@ -3,6 +3,7 @@
 // that can be found in the LICENSE file.
 module ui
 
+
 pub struct ColumnConfig {
 	width     int
 	alignment HorizontalAlignment

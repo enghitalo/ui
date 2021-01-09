@@ -1,5 +1,6 @@
+fns.txt
+
 # Ignore build binaries
-*.so
 *.dll
 *.exe
 *.ilk
@@ -11,6 +12,3 @@ fmt_verify_all
 # Ignore editor files
 *.code-workspace
 .lite_workspace.lua
-
-# Other files
-fns.txt

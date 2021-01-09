@@ -84,7 +84,7 @@ pub interface Layout {
 	unfocus_all()
 	//on_mousemove(MouseMoveFn)
 	draw()
-	resize(w int,h int)
+	resize(w int,h int)	
 }
 pub fn ilayout(x Layout) Layout { return x }
 
@@ -120,7 +120,7 @@ pub enum Cursor {
 	ibeam
 }
 
-fn (mut ui UI) idle_loop() {
+fn (mut ui UI) idle_loop() {	
 	// This method is called by window.run to ensure
 	// that the window will be redrawn slowly, and that
 	// the cursor will blink at a rate of 1Hz, even if
@@ -154,7 +154,7 @@ fn (mut ui UI) idle_loop() {
 
 pub fn run(window &Window) {
 	mut ui := window.ui
-	ui.window = window
+	ui.window = window	
 	go ui.idle_loop()
 	ui.gg.run()
 	/*
@@ -196,7 +196,7 @@ pub fn run(window &Window) {
 	time.sleep_ms(20)
 }
 
-fn (mut ui UI) load_icos() {
+fn (mut ui UI) load_icos() {	
 	ui.cb_image = ui.gg.create_image_from_memory(bytes_check_png,  bytes_check_png_len)
 	$if macos {
 		ui.circle_image = ui.gg.create_image_from_memory(bytes_darwin_circle_png, bytes_darwin_circle_png_len)

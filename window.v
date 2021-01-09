@@ -117,40 +117,6 @@ fn on_event(e &sapp.Event, mut window Window) {
 	}
 	*/
 }
-fn (mut w Window) init(parent Layout) {
-	// b.parent = parent
-	// ui := parent.get_ui()
-	// b.ui = ui
-	// if b.use_icon {
-	// 	b.image = b.ui.gg.create_image(b.icon_path)
-	// }
-	mut subscriber := parent.get_subscriber()
-	subscriber.subscribe_method(events.on_click, win_click, w)
-	subscriber.subscribe_method(events.on_mouse_move, win_hover, w)
-}
-
-fn win_click(mut b Window, e &MouseEvent, window &Window) {
-	// println('btn_click for window=$window.title')
-	// if b.point_inside(e.x, e.y) {
-	// 	// if e.action == .down {
-	// 	// 	b.state = .pressed
-	// 	// } else if e.action == 0 {
-	// 	// 	b.state = .normal
-	// 	// 	if b.onclick != voidptr(0) {
-	// 	// 		b.onclick(window.state, b)
-	// 	// 	}
-	// 	// }
-	// }
-}
-
-fn win_hover(mut b Window, e &MouseMoveEvent, window &Window) {
-	gg.set_cursor(C.IDC_HAND)
-	// if b.point_inside(e.x, e.y) {
-	// 	// if b.onhover != voidptr(0) {
-	// 	// 	b.onhover(window.state, b)
-	// 	// }
-	// }
-}
 
 fn gg_init(mut window Window) {
 	for _, child in window.children {
